@@ -1,5 +1,112 @@
 <html>
-  <p>Test Page</p>
-  <p>t1</p>
-  <p>t2</p>
+
+<head>
+    <title>Doggie NEWS</title>
+    <style>
+        header {
+            background-color: rgb(38, 12, 182);
+            color: white;
+            text-align: center;
+            padding: 5px;
+        }
+
+        nav {
+            line-height: 30px;
+            background-color: #eeeeee;
+            height: 300px;
+            width: 100px;
+            float: left;
+            padding: 5px;
+        }
+
+        section {
+            width: 350px;
+            float: left;
+            padding: 10px;
+        }
+
+        footer {
+            background-color: black;
+            color: white;
+            clear: both;
+            text-align: center;
+            padding: 5px;
+        }
+
+        block {
+            float: left;
+            margin: 5px;
+            padding: 15px;
+            width: 300px;
+            height: 300px;
+            border: 1px solid black;
+        }
+        block1 {
+            float: left;
+            margin: 5px;
+            padding: 15px;
+            width: 300px;
+            height: 100px;
+            border: 1px solid black;
+        }
+
+    </style>
+</head>
+
+<body style='background-color:#006eff'>
+    <header>
+        <h6 align="center">This is a personal server</h6>
+
+        <h1 align="center">hello;welcome</h1>
+        <h2 align="center">Winter vacation NEWS!</h2>
+    </header>
+    <div id="menu" style="background-color:#87858a;height:1200px;width:360px;float:left;">
+        <block>
+            <a href="information.html">more inforation</a>
+            <p>what is this?</p>
+        </block>
+        <br>
+        <block>
+
+            <button type="button" onclick="document.getElementById('time').innerHTML = Date()">
+                chick me to show date
+            </button>
+            <p id="time"></p>
+            <button type="button" onclick="myFunction()">chick me!</button>
+            <p id="demo">Do you want to know what is this?</p>
+
+            <script>
+                function myFunction() {
+                    document.getElementById("demo").innerHTML = "mrjerry.e2.luyouxia.net:24580";
+                }
+            </script>
+        </block>
+        <br>
+        <block>
+            <p align="center">New inforation !</p>
+            <p align="center">if you want to post a news on this website</p>
+            <p align="center">send the news to doggie's e-mail :zzk080603@163.com</p>
+        </block>
+        <br>
+    </div>
+    <div id="menu" style="background-color:#8a98c979;height:1200px;width: 300px;;float:right;">
+        <block1>
+            <a href="">x</a>
+            <p>x</p>
+        </block1>
+    </div>
+
+
+    
+    <footer>
+        <p style="font-family:times;color:grey">by doggie</p>
+        <a href="zzk080603@163.com">Tell your advice to us</a>
+        <p style="font-size:10px">
+            &#128512; &#128516; &#128525; &#128151;
+        </p>
+        <img src="main.jpg" width="203" height="31" />
+    </footer>
+
+</body>
+
 </html>
