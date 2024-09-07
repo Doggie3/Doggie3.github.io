@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Article - My Blog</title>
+    <link rel="stylesheet" href="/styles.css">
+    <script src="/main.js" defer></script>
+</head>
+<body onload="loadSidebar()">
+
+<header>
+    <h1>My Blog</h1>
+    <p>Your daily dose of articles</p>
+</header>
+
+<nav>
+    <a href="/index.html">Home</a>
+    <a href="/about.html">About</a>
+    <a href="/index.html">Blog</a>
+    <a href="/index.html">Contact</a>
+</nav>
+
+<div class="container">
+    <div class="content">
+        <!-- 文章内容 -->
+        <article>
+            <h1>语文答题思路</h1>
+            <p><strong>发布于:</strong> September 5, 2024</p>
+            <h2>排序题</h2>   
+            <ol>
+                <li>注意，意味着前后句意思紧密衔接</li>
+                <li>注意逻辑顺序（小到大，局部到整体）</li>
+                <li>注意标点符号</li>
+            </ol>
+            <h2>词汇类含义题</h2>
+            <blockquote>“...”在文中具体指___</blockquote>
+            <p>2分：一般有两个点</p>
+            <ol>
+                <li>语境中的含义</li>
+                <li>注意词性/词组结构</li>
+            </ol>
+            <h2>概括本文的论证思路</h2>
+            <blockquote>如何论证</blockquote>
+            <ol>
+                <li>概括论证思路</li>
+                <li>论证方法</li>
+                <ul>
+                    <li>比喻论证</li>
+                    <li>例证</li>
+                    <li>引证</li>
+                    <li>比喻论证</li>
+                    <li>类比论证</li>
+                </ul>
+            </ol>
+            <h2>场景分析</h2>
+            <blockquote>给出场景，谈你的看法</blockquote>
+            <p>审题！！！</p>
+            <ol>
+                <li></li>
+                <li></li>
+            </ol>
+            <h2>选择题</h2>
+            <blockquote></blockquote>
+            <p>靠逻辑！！！</p>
+            <ul class="rounded-list">
+                <li>以文本为依据</li>
+                <li>无中生有</li>
+                <li>偷换概念</li>
+                <li>统一率，排中律，矛盾论</li>
+            </ul>
+        </article>
+    </div>
+
+    <!-- 侧栏 -->
+    <div id="sidebar-container"></div>
+</div>
+
+<footer>
+    <p>Copyright © 2024 My Blog. All rights reserved.</p>
+</footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', loadSidebar);
+</script>
+
+
+</body>
+</html>
