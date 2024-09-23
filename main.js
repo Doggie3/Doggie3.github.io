@@ -1,6 +1,6 @@
 // main.js
 function loadSidebar() {
-    if(Document.body.clientWidth>100)
+    if(document.body.clientWidth>500)
     {
         fetch('/sidebar.html')
             .then(response => {
