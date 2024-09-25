@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Article - Doggie's Notes</title>
+    <link rel="stylesheet" href="/styles.css">
+    <script src="/main.js" defer></script>
+</head>
+<body onload="loadSidebar()">
+
+<header>
+    <h1>Doggie's Notes</h1>
+    <p>Your daily dose of articles</p>
+</header>
+
+<nav>
+    <a href="/index.html">Home</a>
+    <a href="/about.html">About</a>
+    <a href="/index.html">Blog</a>
+    <a href="/index.html">Contact</a>
+</nav>
+
+<div class="container">
+    <div class="content">
+        <!-- 文章内容 -->
+        <article>
+            <h1>语文杂项</h1>
+            <small>latest:2024-09-25</small>
+            <ul class="rounded-list">
+                <li>
+                    <div id="words">
+                        <h3>字词解释</h3>
+                        <ul class="rounded-list">
+                            <li>绚：巡行，示众，顺从，湛求</li>
+                            <li>衔：马嚼，含着，包含，心怀，怀恨</li>
+                            <li>格：探究</li>
+                            <li>之：到</li>
+                            <li>第：府邸，科举等第</li>
+                            <li>拜：给升官；左迁：升职</li>
+                            <li>疏：分条陈述的奏章</li>
+                            <li>乞：请求</li>
+                            <li>饬：整治，整顿；告诫</li>
+                            <li>既而：不久；即：之后</li>
+                            <li>甫下车：刚到任</li>
+                            <li>致仕：退休</li>
+                            <li>其…乎，其…哉：大概</li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <div id="approach">
+                        <h3>答题思路</h3>
+                        <ul class="rounded-list">
+                            <li>具体内容：每一连都分析</li>
+                            <li>行文思路：观点+论证层次（举例，正反…）+得出的结论+作者情感</li>
+                            <li>手法：整散结合：概括+作用（整+散）+节奏美+情感</li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </article>
+    </div>
+
+    <!-- 侧栏 -->
+    <div id="sidebar-container"></div>
+</div>
+
+<footer>
+    <p>Copyright © 2024 Doggie's Notes. All rights reserved.</p>
+</footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', loadSidebar);
+</script>
+
+
+</body>
+</html>
