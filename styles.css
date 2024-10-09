@@ -205,4 +205,55 @@ ul.divided-list li {
 ul.divided-list li:last-child {
     border-bottom: none; /* 最后一项不显示分隔线 */
 }
+/* 固定样式 */
+.fixed-item {
+    position: fixed; /* 固定位置 */
+    bottom: 50px;       /* 距离窗口顶部 50px */
+    right: 20px;      /* 距离窗口左侧 20px */
+    z-index: 1000;   /* 确保它在其他元素之上 */
+    flex: 1;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.fixed-item ul {
+    list-style-type: none;
+    padding: 0;
+}
 
+.fixed-item ul li {
+    margin-bottom: 10px;
+}
+
+.fixed-item ul li a {
+    text-decoration: none;
+    color: #007BFF;
+}
+
+.fixed-item ul li a:hover {
+    color: #0056b3;
+}
+
+.library-list-menu{
+    margin-left:20px;display: flex; flex-wrap: wrap;
+}
+
+.library-list-menu .card{
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    height:320px;
+    width: 200px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+    overflow:hidden;  /*内容会被修剪，并且其余内容是不可见的。*/
+    text-overflow: ellipsis;  	/*显示省略符号来代表被修剪的文本*/        
+}
+
+.library-list-menu .card img{
+    width:170px; 
+    height:100px;
+    margin: 0;
+    display:block;
+}
