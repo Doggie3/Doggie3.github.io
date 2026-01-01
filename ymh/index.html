@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>居中响应图片</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        html,body {height:100%; margin:0;}
+        body {
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            background:#dae6ff;
+            -webkit-font-smoothing:antialiased;
+            -moz-osx-font-smoothing:grayscale;
+        }
+        /* 使容器充满并使用 flex 居中图片 */
+        .container {
+            width:100%;
+            height:100%;
+            padding:16px;
+            box-sizing:border-box;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+        }
+        .image-wrapper {
+            position:relative;
+            display:inline-block;
+            transition: 0.25s ease;
+        }
+        /* 主图片样式 */
+        #animatedImage {
+            display:inline-block;
+            max-width: calc(100% - 32px);
+            max-height: calc(100vh - 32px);
+            height:auto;
+            object-fit:contain;
+            cursor: pointer;
+            display:block;
+        }
+        /* 覆盖图片（绝对定位于中心） */
+        .overlay {
+            position:absolute;
+            top:50%;
+            left:50%;
+            transform:translate(-50%,-50%);
+            max-width: calc(100% - 32px);
+            max-height: calc(100vh - 32px);
+            opacity:0.95;
+            cursor:pointer;
+            transition: filter 0.25s ease;
+        }
+        .sock-left {
+            position:absolute;
+            top:50%;
+            left:47%;
+            transform:translate(-50%,-50%);
+            max-width: calc(100% - 32px);
+            max-height: calc(100vh - 32px);
+            opacity:0.95;
+            cursor:pointer;
+            transition: filter 0.25s ease;
+            filter:opacity(0.5) drop-shadow(0 0 0 red);
+        }
+        .sock-right {
+            position:absolute;
+            top:50%;
+            left:47%;
+            transform:translate(-50%,-50%);
+            max-width: calc(100% - 32px);
+            max-height: calc(100vh - 32px);
+            opacity:0.95;
+            cursor:pointer;
+            transition: filter 0.25s ease;
+            filter:opacity(0.5) drop-shadow(0 0 0 rgb(4, 0, 255));
+        }
+        .image-wrapper.animate {
+            animation: bounce 0.5s ease;
+        }
+        .blackboard {
+            position: fixed;
+            right: 0;
+            top: 0;
+            transform:translate(0,0);
+            width: 344px;
+            height: 728px;
+            z-index: 0;
+            opacity: 1;
+            transition: 0.25s ease;
+
+        }
+        .blackboard img {
+            opacity: 0.3;
+        }
+        .toptext {
+            position: fixed;
+            display: inline-block;
+            left: 15;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            font-size: 14px;
+            line-height: 1.5;
+            color: #333;
+            text-align: left;
+            padding: 20px;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", sans-serif;
+        }
+        .toptext p tag{
+            margin: 0;
+            color: #ff0000;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        .bottomtext {
+            position: fixed;
+            display: inline-block;
+            left: 15;
+            bottom: 100px;
+            width: 100%;
+            height: 50px;
+            z-index: -1;
+            font-size: 14px;
+            line-height: 1.5;
+            color: #333;
+            text-align: left;
+            padding: 20px;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", sans-serif;
+        }
+        .righttext {
+            position: fixed;
+            display: inline-block;
+            right: 10px;
+            top: 400px;
+            width: 270px;
+            height: 100px;
+            z-index: -1;
+            font-size: 24px;
+            line-height: 1.5;
+            color: #333;
+            text-align: left;
+            padding: 20px;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="toptext">
+            <p>人中龙凤—<tag>G320</tag><br>
+            <tag>专属被动：</tag>睁开第三只眼<br>
+            <tag>被动性：</tag>每冲808根糖在糖内刷屏<br>
+            人称兔马中吕布<br>
+            拥有独特穿衣品味，超绝嗓音，黑洞般深邃的“眼睛”<br>
+            而狼险胜真菌，超绝计算能力，一定对的思路<br>
+            金锐一对一优秀任教经历，小红书优质博，PYQ大作家<br>
+            组网 租车公司，售卖的精美珍珠奶茶创始人<br>
+            赛会高至全服对白的神人，区标超体使者，超体扁鹊<br>
+            深情的情蛊大师，一念躺赢，高能躲子弹，拥有霸道的后宫<br>
+            借钱达人，全岛每大师币6.4就可借钱共同<br>
+            这是我教的啊 WYC站站站站！<br>
+            你是错的<br>
+            有道理哦</p>
+        </div>
+        <div class="blackboard" >
+            <img id="blackboard" src="blackboard.png" alt="黑板背景">
+        </div>
+        <div id="image-wrapper" class="image-wrapper">
+            <img id="animatedImage" src="people-removebg-preview.png" alt="人物图片">
+            <img id="overlaySockLeft" class="sock-left" src="sock-removebg-preview-L.png" alt="袜子覆盖">
+            <img id="overlaySockRight" class="sock-right" src="sock-removebg-preview-R.png" alt="袜子覆盖">
+        </div>
+        <div class="bottomtext">
+            喜欢自己做微信名备忘录的神人<br>
+            拥有以叶信恺为首的忠犬 汪队人<br>
+            喜欢玩天天台球<br>
+            喜欢在电车上看 美政治问题<br>
+            曾在模联给选手打活开/判时称与其风子有问题且导致高昱Timing挂机<br>
+        </div>
+        <div class="righttext">
+            光辉事迹：<br>
+            因太帅被女网甩了<br>
+            小红书多次被禁<br>
+            喜欢刮别人心口一分<br>
+            想去撸猫馆养猫
+        </div>
+    </div>
+    <script>
+        var r,g,b;
+        const mainImg = document.getElementById('image-wrapper');
+        if (mainImg) {
+            mainImg.onclick = function() {
+                
+                const overlaySockLeft = document.getElementById('overlaySockLeft');
+                const overlaySockRight = document.getElementById('overlaySockRight');
+                overlaySockLeft.style.filter = 'opacity(0.5) drop-shadow(0 0 0px '+getRandomColorRGB() + ')';
+                overlaySockRight.style.filter = 'opacity(0.5) drop-shadow(0 0 0px '+ getRandomColorRGB() + ')';
+
+            };
+            mainImg.onmouseover = function() {
+                mainImg.style.scale = '1.05';
+            };
+            mainImg.onmouseout = function() {
+                mainImg.style.scale = '1.0';
+            };
+        }
+        const blackboard = document.getElementById('blackboard');
+        if(blackboard){
+            blackboard.onmouseover = function() {
+                blackboard.style.scale = '1.05';
+                blackboard.style.opacity = '1';
+            };
+            blackboard.onmouseout = function() {
+                blackboard.style.scale = '1.0';
+                blackboard.style.opacity = '0.3';
+            };
+        }
+
+        function getRandomColorRGB() {
+            r = Math.floor(Math.random() * 256);
+            g = Math.floor(Math.random() * 256);
+            b = Math.floor(Math.random() * 256);
+            return 'rgb(' + r + ', ' + g + ', ' + b + ')';
+        }
+
+            
+    </script>
+</body>
+</html>
