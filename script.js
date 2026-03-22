@@ -3,58 +3,69 @@ let mousey;
 var pageListIndex = 0;
 function Initiate(){
     console.log("Initiating...");
-    RefrshPage("Index");
-    var pageList = document.getElementsByClassName("Page");
-    for (let i = 0; i < pageList.length; i++) {
-        pageList[i].style.transition = "none";
-        pageList[i].style.left = "100%";
-        pageList[i].style.transition="all 0.5s ease-in-out";
-    }
-    pageList[pageListIndex].style.left = "0";
-    var body = document.getElementsByTagName("html")[0];
-    body.addEventListener('touchstart', function(event) {
-        event.preventDefault();
-        MouseMove();
-    }, { passive: false });
-    body.addEventListener('touchend', function(event) {
-        event.preventDefault();
-        MouseMove();
-    }, { passive: false });
-    body.addEventListener('touchmove', function(event) {
-        event.preventDefault();
-    }, { passive: false });
-    body.addEventListener('scroll', function(event) {
-        event.preventDefault();
-    }, { passive: false });
+    RefrshPage("Index").then(() => {
+        var pageList = document.getElementsByClassName("Page");
+        for (let i = 0; i < pageList.length; i++) {
+            pageList[i].style.transition = "none";
+            pageList[i].style.left = "100%";
+            pageList[i].style.transition="all 0.5s ease-in-out";
+        }
+        pageList[pageListIndex].style.left = "0";
+        var body = document.getElementsByTagName("html")[0];
+        body.addEventListener('touchstart', function(event) {
+            event.preventDefault();
+            MouseMove();
+        }, { passive: false });
+        body.addEventListener('touchend', function(event) {
+            event.preventDefault();
+            MouseMove();
+        }, { passive: false });
+        body.addEventListener('touchmove', function(event) {
+            event.preventDefault();
+        }, { passive: false });
+        body.addEventListener('scroll', function(event) {
+            event.preventDefault();
+        }, { passive: false });
+    });
 }
 function LoadPage(location,index){
-    var pageListParent = document.getElementsByClassName("PageList")[0];
-    var content;
-    fetch(location)
-    .then(response => response.text())
-    .then(data => {
-        content = data;
-        pageListParent.appendChild(document.createElement("div")).setAttribute("class", "Page");
-        pageListParent.lastChild.setAttribute("id", index);
-        pageListParent.lastChild.style.left = "100%";
-        pageListParent.lastChild.innerHTML = content;
+    return new Promise((resolve, reject) => {
+        var pageListParent = document.getElementsByClassName("PageList")[0];
+        var content;
+        fetch(location)
+        .then(response => response.text())
+        .then(data => {
+            content = data;
+            pageListParent.appendChild(document.createElement("div")).setAttribute("class", "Page");
+            pageListParent.lastChild.setAttribute("id", index);
+            pageListParent.lastChild.style.left = "100%";
+            pageListParent.lastChild.innerHTML = content;
+            resolve();
+        })
+        .catch(error => reject(error));
     });
 }
 var IndexSelection = ["/data/IndexSelection/HomePage", "/data/IndexSelection/NewsPage","/data/IndexSelection/AboutPage"];
 function RefrshPage(selection){
-    var pageListParent = document.getElementsByClassName("PageList")[0];
-    pageListParent.innerHTML = "";
-    var index = 0;
-    pageListIndex = 0;
-    switch(selection){
-        case "Index":
-            IndexSelection.forEach(element => {
-                console.log(`Loading page: ${element}`);
-                LoadPage(element,index);
-                index++;
-            });
-            break;
-    }
+    return new Promise((resolve, reject) => {
+        var pageListParent = document.getElementsByClassName("PageList")[0];
+        pageListParent.innerHTML = "";
+        var index = 0;
+        pageListIndex = 0;
+        switch(selection){
+            case "Index":
+                var promises = [];
+                IndexSelection.forEach(element => {
+                    console.log(`Loading page: ${element}`);
+                    promises.push(LoadPage(element,index));
+                    index++;
+                });
+                Promise.all(promises).then(() => resolve()).catch(error => reject(error));
+                break;
+            default:
+                resolve();
+        }
+    });
 }
 
 function SwitchPage(mdx, mdy){
