@@ -3,6 +3,7 @@ let mousey;
 var pageListIndex = 0;
 function Initiate(){
     console.log("Initiating...");
+    RefrshPage("Index");
     var pageList = document.getElementsByClassName("Page");
     for (let i = 0; i < pageList.length; i++) {
         pageList[i].style.transition = "none";
@@ -12,19 +13,50 @@ function Initiate(){
     pageList[pageListIndex].style.left = "0";
     var body = document.getElementsByTagName("html")[0];
     body.addEventListener('touchstart', function(event) {
+        event.preventDefault();
         MouseMove();
-    });
+    }, { passive: false });
     body.addEventListener('touchend', function(event) {
+        event.preventDefault();
         MouseMove();
+    }, { passive: false });
+    body.addEventListener('touchmove', function(event) {
+        event.preventDefault();
+    }, { passive: false });
+    body.addEventListener('scroll', function(event) {
+        event.preventDefault();
+    }, { passive: false });
+}
+function LoadPage(location,index){
+    var pageListParent = document.getElementsByClassName("PageList")[0];
+    var content;
+    fetch(location)
+    .then(response => response.text())
+    .then(data => {
+        content = data;
+        pageListParent.appendChild(document.createElement("div")).setAttribute("class", "Page");
+        pageListParent.lastChild.setAttribute("id", index);
+        pageListParent.lastChild.style.left = "100%";
+        pageListParent.lastChild.innerHTML = content;
     });
 }
-function ShowPage(index){
-    var pageList = document.getElementsByClassName("Page");
-    for (let i = 0; i < pageList.length; i++) {
-        pageList[i].style.display = "none";
+var IndexSelection = ["/data/IndexSelection/HomePage", "/data/IndexSelection/NewsPage","/data/IndexSelection/AboutPage"];
+function RefrshPage(selection){
+    var pageListParent = document.getElementsByClassName("PageList")[0];
+    pageListParent.innerHTML = "";
+    var index = 0;
+    pageListIndex = 0;
+    switch(selection){
+        case "Index":
+            IndexSelection.forEach(element => {
+                console.log(`Loading page: ${element}`);
+                LoadPage(element,index);
+                index++;
+            });
+            break;
     }
-    pageList[index].style.display = "block";
 }
+
 function SwitchPage(mdx, mdy){
     var direction = "";
     var needChange = false;
@@ -94,7 +126,7 @@ function MouseMove(){
     mouseDown = !mouseDown;
     if(mouseDown==false)
     {
-        console.log(`Delta X: ${deltaX}, Delta Y: ${deltaY}`);
+        //console.log(`Delta X: ${deltaX}, Delta Y: ${deltaY}`);
         SwitchPage(deltaX, deltaY);
     }
 }
