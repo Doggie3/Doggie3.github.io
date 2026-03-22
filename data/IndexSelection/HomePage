@@ -1,1 +1,5 @@
-<h1>Home</h1>
+<h2>Home</h2>
+<div class="Card">
+    <h3>欢迎</h3>
+    <p></p>
+</div>

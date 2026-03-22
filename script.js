@@ -11,6 +11,11 @@ function Initiate(){
             pageList[i].style.transition="all 0.5s ease-in-out";
         }
         pageList[pageListIndex].style.left = "0";
+        var Title = document.getElementsByClassName("Title")[0];
+        if (Title) {
+            Title.style.left = "0%";
+            Title.style.transition = "left 0.5s ease-in-out";
+        }
         var body = document.getElementsByTagName("html")[0];
         body.addEventListener('touchstart', function(event) {
             event.preventDefault();
@@ -29,21 +34,8 @@ function Initiate(){
     });
 }
 function LoadPage(location,index){
-    return new Promise((resolve, reject) => {
-        var pageListParent = document.getElementsByClassName("PageList")[0];
-        var content;
-        fetch(location)
-        .then(response => response.text())
-        .then(data => {
-            content = data;
-            pageListParent.appendChild(document.createElement("div")).setAttribute("class", "Page");
-            pageListParent.lastChild.setAttribute("id", index);
-            pageListParent.lastChild.style.left = "100%";
-            pageListParent.lastChild.innerHTML = content;
-            resolve();
-        })
-        .catch(error => reject(error));
-    });
+    return fetch(location)
+    .then(response => response.text());
 }
 var IndexSelection = ["/data/IndexSelection/HomePage", "/data/IndexSelection/NewsPage","/data/IndexSelection/AboutPage"];
 function RefrshPage(selection){
@@ -57,10 +49,19 @@ function RefrshPage(selection){
                 var promises = [];
                 IndexSelection.forEach(element => {
                     console.log(`Loading page: ${element}`);
+                    pageListParent.appendChild(document.createElement("div")).setAttribute("class", "Page");
+                    pageListParent.lastChild.setAttribute("id", index);
+                    pageListParent.lastChild.style.left = "100%";
                     promises.push(LoadPage(element,index));
                     index++;
                 });
-                Promise.all(promises).then(() => resolve()).catch(error => reject(error));
+                Promise.all(promises).then(contents => {
+                    var pages = document.getElementsByClassName("Page");
+                    contents.forEach((content, i) => {
+                        pages[i].innerHTML = content;
+                    });
+                    resolve();
+                }).catch(error => reject(error));
                 break;
             default:
                 resolve();
@@ -87,29 +88,69 @@ function SwitchPage(mdx, mdy){
     if(needChange){
         
         if(pageListIndex<0){
-            pageListIndex = 0;
+            pageListIndex = document.getElementsByClassName("Page").length-1;
         }
         else if(pageListIndex>document.getElementsByClassName("Page").length-1){
-            pageListIndex = document.getElementsByClassName("Page").length-1;
+            pageListIndex = 0;
         }
         var currentPage = document.getElementsByClassName("Page")[index];
         var nextPage = document.getElementsByClassName("Page")[pageListIndex];
+        var Title = document.getElementsByClassName("Title")[0];
         
         switch(direction){
             case "left":
-            currentPage.style.left = "-100%";
-            nextPage.style.transition = "0s";
-            nextPage.style.left = "100%";
-            break;
+                currentPage.style.transition = "all 0.5s ease-in-out";
+                nextPage.style.transition = "none";
+                currentPage.style.left = "-100%";
+                nextPage.style.left = "100%";
+                break;
             case "right":
-            currentPage.style.left = "100%";
-            nextPage.style.transition = "0s";
-            nextPage.style.left = "-100%";
-            break;
+                currentPage.style.transition = "all 0.5s ease-in-out";
+                nextPage.style.transition = "none";
+                currentPage.style.left = "100%";
+                nextPage.style.left = "-100%";
+                break;
         }
-        
+
+        // 强制浏览器应用上面位置（重绘），再开始动画到 0
+        nextPage.offsetHeight;
+        requestAnimationFrame(() => {
+            nextPage.style.transition = "all 0.5s ease-in-out";
             nextPage.style.left = "0";
-            nextPage.style.transition="all 0.5s ease-in-out";
+            // 检查是否循环切换
+            var isLoopLeft = (direction === "left" && index === 2 && pageListIndex === 0);
+            var isLoopRight = (direction === "right" && index === 0 && pageListIndex === 2);
+            if (isLoopLeft) {
+                // 左滑到头：从左边出去再从右边进来
+                Title.style.transition = "left 0.25s ease-in-out";
+                Title.style.left = "-100%";
+                setTimeout(() => {
+                    Title.style.transition = "none";
+                    Title.style.left = "100%";
+                    Title.offsetHeight;
+                    setTimeout(() => {
+                        Title.style.transition = "left 0.5s ease-in-out";
+                        Title.style.left = (pageListIndex * -30) + "%";
+                    }, 10);
+                }, 250);
+            } else if (isLoopRight) {
+                // 右滑到头：从右边出去再从左边进来
+                Title.style.transition = "left 0.5s ease-in-out";
+                Title.style.left = "100%";
+                setTimeout(() => {
+                    Title.style.transition = "none";
+                    Title.style.left = "-100%";
+                    Title.offsetHeight;
+                    setTimeout(() => {
+                        Title.style.transition = "left 0.5s ease-in-out";
+                        Title.style.left = (pageListIndex * -30) + "%";
+                    }, 10);
+                }, 250);
+            } else {
+                // 正常设置 Title left 减少 30%
+                Title.style.left = (pageListIndex * -30) + "%";
+            }
+        });
         //ShowPage(pageListIndex);
         
     }  
