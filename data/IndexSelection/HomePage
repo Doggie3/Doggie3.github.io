@@ -1,5 +1,18 @@
 <h2>Home</h2>
-<div class="Card">
-    <h3>欢迎</h3>
-    <p></p>
+<div class="list">
+    <div class="list_item">
+        <h3>列表内容标题1</h3>
+        <p>列表内容简介,这是简介，应该会被裁剪，最后几个字符不应该超出范围，测试字符123456789</p>
+        <div class="list_item_side_note"><p>9:20am</p></div>
+    </div>
+    <div class="list_item">
+        <h3>列表内容标题2</h3>
+        <p>列表内容简介,这是简介，应该会被裁剪，最后几个字符不应该超出范围，测试字符123456789</p>
+        <div class="list_item_side_note"><p>3/22</p></div>
+    </div>
+    <div class="list_item">
+        <h3>列表内容标题3</h3>
+        <p>列表内容简介,这是简介，应该会被裁剪，最后几个字符不应该超出范围，测试字符123456789</p>
+        <div class="list_item_side_note"><p>3/22/2090</p></div>
+    </div>
 </div>

@@ -18,11 +18,11 @@ function Initiate(){
         }
         var body = document.getElementsByTagName("html")[0];
         body.addEventListener('touchstart', function(event) {
-            event.preventDefault();
+            //event.preventDefault();
             MouseMove();
         }, { passive: false });
         body.addEventListener('touchend', function(event) {
-            event.preventDefault();
+            //event.preventDefault();
             MouseMove();
         }, { passive: false });
         body.addEventListener('touchmove', function(event) {
@@ -73,6 +73,10 @@ function SwitchPage(mdx, mdy){
     var direction = "";
     var needChange = false;
     var index=pageListIndex;
+    if(Math.abs(mdx) < Math.abs(mdy)) {
+        // 垂直方向移动更多，忽略水平移动
+        return;
+    }
     if(mdx>10)
     {
         direction = "left";
@@ -145,7 +149,7 @@ function SwitchPage(mdx, mdy){
                         Title.style.transition = "left 0.5s ease-in-out";
                         Title.style.left = (pageListIndex * -30) + "%";
                     }, 10);
-                }, 250);
+                }, 500);
             } else {
                 // 正常设置 Title left 减少 30%
                 Title.style.left = (pageListIndex * -30) + "%";
