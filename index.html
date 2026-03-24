@@ -2,14 +2,27 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <meta name="theme-color" id='status-bar-meta' content="rgb(195,193,180)">
+    <meta name="apple-mobile-web-app-capable" content="yes">
     <link rel="stylesheet" href="styles.css">
     <script src="script.js"></script>
     <title>Metro Web App</title>
 </head>
 <body>
+    <!-- 信息栏 -->
+    <div class="InfoBar">
+        <div class="InfoBarItem">Metro Web App</div>
+    </div>
+    <!-- 主页内容 -->
     <h1 class="Title">Index</h1>
     <div class="PageList">
+    </div>
+    <!-- 底部按钮 -->
+    <div class="BottomBar">
+        <button class="ReturnPageButton" onclick="GoBack()">←</button>
+        <button class="HomePageButton" onclick="GoHome()">主页</button>
+        <button class="RefreshPageButton" onclick="Refresh()">刷新</button>
     </div>
 </body>
 

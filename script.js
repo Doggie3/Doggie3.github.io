@@ -19,6 +19,7 @@ function Initiate(){
         var body = document.getElementsByTagName("html")[0];
         body.addEventListener('touchstart', function(event) {
             //event.preventDefault();
+            mouseDown = false;
             MouseMove();
         }, { passive: false });
         body.addEventListener('touchend', function(event) {
@@ -127,10 +128,10 @@ function SwitchPage(mdx, mdy){
             if (isLoopLeft) {
                 // 左滑到头：从左边出去再从右边进来
                 Title.style.transition = "left 0.25s ease-in-out";
-                Title.style.left = "-100%";
+                Title.style.left = "-200%";
                 setTimeout(() => {
                     Title.style.transition = "none";
-                    Title.style.left = "100%";
+                    Title.style.left = "200%";
                     Title.offsetHeight;
                     setTimeout(() => {
                         Title.style.transition = "left 0.5s ease-in-out";
@@ -143,10 +144,10 @@ function SwitchPage(mdx, mdy){
                 Title.style.left = "100%";
                 setTimeout(() => {
                     Title.style.transition = "none";
-                    Title.style.left = "-100%";
+                    Title.style.left = "-200%";
                     Title.offsetHeight;
                     setTimeout(() => {
-                        Title.style.transition = "left 0.5s ease-in-out";
+                        Title.style.transition = "left 0.25s ease-in-out";
                         Title.style.left = (pageListIndex * -30) + "%";
                     }, 10);
                 }, 500);
@@ -187,3 +188,7 @@ function MouseMove(){
     }
 }
 onload = Initiate;
+
+function GoHome(){
+    Initiate();
+}
